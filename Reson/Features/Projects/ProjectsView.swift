@@ -90,8 +90,16 @@ struct ProjectDetailView: View {
     let project: ProjectItem
     @State private var isPresentingAddTask = false
 
-    private var assignedTasks: [TaskItem] {
-        tasks.filter { $0.project?.id == project.id }
+    private var activeAssignedTasks: [TaskItem] {
+        tasks.filter { $0.project?.id == project.id && !$0.isCompleted }
+    }
+
+    private var completedAssignedTasks: [TaskItem] {
+        tasks.filter { $0.project?.id == project.id && $0.isCompleted }
+    }
+
+    private var hasAssignedTasks: Bool {
+        !activeAssignedTasks.isEmpty || !completedAssignedTasks.isEmpty
     }
 
     var body: some View {
@@ -117,14 +125,18 @@ struct ProjectDetailView: View {
             }
 
             Section("Related Tasks") {
-                if assignedTasks.isEmpty {
+                if activeAssignedTasks.isEmpty {
                     ContentUnavailableView(
-                        "No Assigned Tasks",
+                        hasAssignedTasks ? "No Active Tasks" : "No Assigned Tasks",
                         systemImage: "checkmark.circle",
-                        description: Text("Create a task for this project to see it here.")
+                        description: Text(
+                            hasAssignedTasks
+                                ? "Completed tasks are listed below."
+                                : "Create a task for this project to see it here."
+                        )
                     )
                 } else {
-                    ForEach(assignedTasks, id: \.id) { task in
+                    ForEach(activeAssignedTasks, id: \.id) { task in
                         Button {
                             task.isCompleted.toggle()
                         } label: {
@@ -135,6 +147,35 @@ struct ProjectDetailView: View {
                                 Text(task.title)
                                     .strikethrough(task.isCompleted)
                                     .foregroundStyle(task.isCompleted ? .secondary : .primary)
+
+                                Spacer()
+                            }
+                        }
+                        .buttonStyle(.plain)
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                modelContext.delete(task)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
+                    }
+                }
+            }
+
+            if !completedAssignedTasks.isEmpty {
+                Section("Completed") {
+                    ForEach(completedAssignedTasks, id: \.id) { task in
+                        Button {
+                            task.isCompleted = false
+                        } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundStyle(.green)
+
+                                Text(task.title)
+                                    .strikethrough()
+                                    .foregroundStyle(.secondary)
 
                                 Spacer()
                             }

@@ -24,7 +24,7 @@ struct ContentView: View {
                     Label("AI", systemImage: "sparkles")
                 }
 
-            BoardView()
+            ProjectsView()
                 .tabItem {
                     Label("Board", systemImage: "rectangle.3.group")
                 }

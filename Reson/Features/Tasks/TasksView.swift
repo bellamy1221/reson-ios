@@ -11,10 +11,14 @@ struct TasksView: View {
     @Query(sort: \TaskItem.createdAt, order: .reverse) private var tasks: [TaskItem]
     @State private var isPresentingAddTask = false
 
+    private var activeTasks: [TaskItem] {
+        tasks.filter { !$0.isCompleted }
+    }
+
     var body: some View {
         NavigationStack {
             Group {
-                if tasks.isEmpty {
+                if activeTasks.isEmpty {
                     ContentUnavailableView(
                         "No Tasks",
                         systemImage: "checkmark.circle",
@@ -22,7 +26,7 @@ struct TasksView: View {
                     )
                 } else {
                     List {
-                        ForEach(tasks) { task in
+                        ForEach(activeTasks) { task in
                             Button {
                                 task.isCompleted.toggle()
                             } label: {
@@ -60,6 +64,14 @@ struct TasksView: View {
             }
             .navigationTitle("Tasks")
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink {
+                        CompletedTasksView()
+                    } label: {
+                        Label("Completed", systemImage: "checkmark.circle")
+                    }
+                }
+
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         isPresentingAddTask = true
@@ -72,6 +84,56 @@ struct TasksView: View {
                 AddTaskView()
             }
         }
+    }
+}
+
+private struct CompletedTasksView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query(sort: \TaskItem.createdAt, order: .reverse) private var tasks: [TaskItem]
+
+    private var completedTasks: [TaskItem] {
+        tasks.filter(\.isCompleted)
+    }
+
+    var body: some View {
+        Group {
+            if completedTasks.isEmpty {
+                ContentUnavailableView(
+                    "No Completed Tasks",
+                    systemImage: "checkmark.circle",
+                    description: Text("Completed tasks will appear here.")
+                )
+            } else {
+                List {
+                    ForEach(completedTasks) { task in
+                        Button {
+                            task.isCompleted = false
+                        } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundStyle(.green)
+
+                                Text(task.title)
+                                    .strikethrough()
+                                    .foregroundStyle(.secondary)
+
+                                Spacer()
+                            }
+                        }
+                        .buttonStyle(.plain)
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                modelContext.delete(task)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
+                    }
+                }
+                .listStyle(.plain)
+            }
+        }
+        .navigationTitle("Completed")
     }
 }
 
