@@ -89,9 +89,13 @@ struct ProjectDetailView: View {
     @Query(sort: \TaskItem.createdAt, order: .reverse) private var tasks: [TaskItem]
     let project: ProjectItem
     @State private var isPresentingAddTask = false
+    @State private var taskToSkip: TaskItem?
+    @State private var isShowingPlanUpdated = false
 
     private var activeAssignedTasks: [TaskItem] {
-        tasks.filter { $0.project?.id == project.id && !$0.isCompleted }
+        tasks
+            .filter { $0.project?.id == project.id && !$0.isCompleted }
+            .sorted { ($0.dueDate ?? .distantFuture) < ($1.dueDate ?? .distantFuture) }
     }
 
     private var completedAssignedTasks: [TaskItem] {
@@ -144,15 +148,39 @@ struct ProjectDetailView: View {
                                 Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
                                     .foregroundStyle(task.isCompleted ? .green : .secondary)
 
-                                Text(task.title)
-                                    .strikethrough(task.isCompleted)
-                                    .foregroundStyle(task.isCompleted ? .secondary : .primary)
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text(task.title)
+                                        .strikethrough(task.isCompleted)
+                                        .foregroundStyle(task.isCompleted ? .secondary : .primary)
+
+                                    if let dueDate = task.dueDate {
+                                        Label(
+                                            dueDate.formatted(date: .abbreviated, time: .shortened),
+                                            systemImage: "calendar"
+                                        )
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                    }
+
+                                    if task.wasSkipped {
+                                        Text("Rescheduled")
+                                            .font(.caption.weight(.medium))
+                                            .foregroundStyle(.orange)
+                                    }
+                                }
 
                                 Spacer()
                             }
                         }
                         .buttonStyle(.plain)
                         .swipeActions {
+                            Button {
+                                taskToSkip = task
+                            } label: {
+                                Label("Skip", systemImage: "forward.fill")
+                            }
+                            .tint(.orange)
+
                             Button(role: .destructive) {
                                 modelContext.delete(task)
                             } label: {
@@ -205,6 +233,38 @@ struct ProjectDetailView: View {
         }
         .sheet(isPresented: $isPresentingAddTask) {
             AddTaskView(project: project)
+        }
+        .sheet(item: $taskToSkip) { task in
+            TaskSkipSheet(taskTitle: task.title) { reason in
+                skip(task, for: reason)
+            }
+        }
+        .overlay(alignment: .bottom) {
+            if isShowingPlanUpdated {
+                Text("Plan updated")
+                    .font(.subheadline.weight(.medium))
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(.regularMaterial, in: Capsule())
+                    .padding(.bottom, 20)
+                    .transition(.opacity.combined(with: .move(edge: .bottom)))
+            }
+        }
+    }
+
+    private func skip(_ task: TaskItem, for reason: TaskSkipReason) {
+        TaskPlanAdapter.skip(task, reason: reason, among: tasks)
+        try? modelContext.save()
+
+        withAnimation {
+            isShowingPlanUpdated = true
+        }
+
+        Task {
+            try? await Task.sleep(for: .seconds(2))
+            withAnimation {
+                isShowingPlanUpdated = false
+            }
         }
     }
 }

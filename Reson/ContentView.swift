@@ -11,22 +11,22 @@ struct ContentView: View {
         TabView {
             HomeView()
                 .tabItem {
-                    Label("Home", systemImage: "house")
-                }
-
-            TasksView()
-                .tabItem {
-                    Label("Tasks", systemImage: "checkmark.circle")
-                }
-
-            AIView()
-                .tabItem {
-                    Label("AI", systemImage: "sparkles")
+                    Label("Today", systemImage: "sun.max")
                 }
 
             ProjectsView()
                 .tabItem {
-                    Label("Board", systemImage: "rectangle.3.group")
+                    Label("Goals", systemImage: "target")
+                }
+
+            AIView()
+                .tabItem {
+                    Label("Coach", systemImage: "sparkles")
+                }
+
+            ProgressView()
+                .tabItem {
+                    Label("Progress", systemImage: "chart.bar")
                 }
 
             SettingsView()

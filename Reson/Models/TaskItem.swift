@@ -13,6 +13,8 @@ final class TaskItem {
     var isCompleted: Bool
     var createdAt: Date
     var dueDate: Date?
+    var wasSkipped: Bool = false
+    var skipReason: String?
     var project: ProjectItem?
 
     init(
@@ -21,6 +23,8 @@ final class TaskItem {
         isCompleted: Bool = false,
         createdAt: Date = .now,
         dueDate: Date? = nil,
+        wasSkipped: Bool = false,
+        skipReason: String? = nil,
         project: ProjectItem? = nil
     ) {
         self.id = id
@@ -28,6 +32,8 @@ final class TaskItem {
         self.isCompleted = isCompleted
         self.createdAt = createdAt
         self.dueDate = dueDate
+        self.wasSkipped = wasSkipped
+        self.skipReason = skipReason
         self.project = project
     }
 }
