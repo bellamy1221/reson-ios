@@ -24,10 +24,37 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A10000000000000000000001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A10000000000000000000002 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		A10000000000000000000003 /* ResonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResonApp.swift; sourceTree = "<group>"; };
+		A10000000000000000000004 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A10000000000000000000005 /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
+		A10000000000000000000006 /* AIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIView.swift; sourceTree = "<group>"; };
+		A10000000000000000000007 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		A10000000000000000000008 /* ProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsView.swift; sourceTree = "<group>"; };
+		A10000000000000000000009 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A1000000000000000000000A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1000000000000000000000B /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
+		A1000000000000000000000C /* ProjectItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectItem.swift; sourceTree = "<group>"; };
 		142DA54F300A06E4009D1F34 /* Reson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reson.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		142DA560300A06E5009D1F34 /* ResonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		142DA56A300A06E5009D1F34 /* ResonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXBuildFile section */
+		A10000000000000000000011 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000001 /* ContentView.swift */; };
+		A10000000000000000000012 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000002 /* Item.swift */; };
+		A10000000000000000000013 /* ResonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000003 /* ResonApp.swift */; };
+		A10000000000000000000014 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000004 /* HomeView.swift */; };
+		A10000000000000000000015 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000005 /* TasksView.swift */; };
+		A10000000000000000000016 /* AIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000006 /* AIView.swift */; };
+		A10000000000000000000017 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000007 /* BoardView.swift */; };
+		A10000000000000000000018 /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000008 /* ProjectsView.swift */; };
+		A10000000000000000000019 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000009 /* SettingsView.swift */; };
+		A1000000000000000000001A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000A /* Assets.xcassets */; };
+		A1000000000000000000001B /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000B /* TaskItem.swift */; };
+		A1000000000000000000001C /* ProjectItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000C /* ProjectItem.swift */; };
+/* End PBXBuildFile section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		142DA572300A06E5009D1F34 /* Exceptions for "Reson" folder in "Reson" target */ = {
@@ -40,14 +67,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		142DA551300A06E4009D1F34 /* Reson */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				142DA572300A06E5009D1F34 /* Exceptions for "Reson" folder in "Reson" target */,
-			);
-			path = Reson;
-			sourceTree = "<group>";
-		};
 		142DA563300A06E5009D1F34 /* ResonTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ResonTests;
@@ -105,6 +124,47 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		142DA551300A06E4009D1F34 /* Reson */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000003 /* ResonApp.swift */,
+				A10000000000000000000001 /* ContentView.swift */,
+				A10000000000000000000002 /* Item.swift */,
+				A1000000000000000000000A /* Assets.xcassets */,
+				A10000000000000000000027 /* Models */,
+				A10000000000000000000020 /* Features */,
+			);
+			path = Reson;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000027 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A1000000000000000000000B /* TaskItem.swift */,
+				A1000000000000000000000C /* ProjectItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000020 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000021 /* Home */,
+				A10000000000000000000022 /* Tasks */,
+				A10000000000000000000023 /* AI */,
+				A10000000000000000000024 /* Board */,
+				A10000000000000000000025 /* Projects */,
+				A10000000000000000000026 /* Settings */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000021 /* Home */ = {isa = PBXGroup; children = (A10000000000000000000004 /* HomeView.swift */, ); path = Home; sourceTree = "<group>"; };
+		A10000000000000000000022 /* Tasks */ = {isa = PBXGroup; children = (A10000000000000000000005 /* TasksView.swift */, ); path = Tasks; sourceTree = "<group>"; };
+		A10000000000000000000023 /* AI */ = {isa = PBXGroup; children = (A10000000000000000000006 /* AIView.swift */, ); path = AI; sourceTree = "<group>"; };
+		A10000000000000000000024 /* Board */ = {isa = PBXGroup; children = (A10000000000000000000007 /* BoardView.swift */, ); path = Board; sourceTree = "<group>"; };
+		A10000000000000000000025 /* Projects */ = {isa = PBXGroup; children = (A10000000000000000000008 /* ProjectsView.swift */, ); path = Projects; sourceTree = "<group>"; };
+		A10000000000000000000026 /* Settings */ = {isa = PBXGroup; children = (A10000000000000000000009 /* SettingsView.swift */, ); path = Settings; sourceTree = "<group>"; };
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +179,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				142DA551300A06E4009D1F34 /* Reson */,
 			);
 			name = Reson;
 			packageProductDependencies = (
@@ -225,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1000000000000000000001A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +307,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A10000000000000000000011 /* ContentView.swift in Sources */,
+				A10000000000000000000012 /* Item.swift in Sources */,
+				A10000000000000000000013 /* ResonApp.swift in Sources */,
+				A10000000000000000000014 /* HomeView.swift in Sources */,
+				A10000000000000000000015 /* TasksView.swift in Sources */,
+				A10000000000000000000016 /* AIView.swift in Sources */,
+				A10000000000000000000017 /* BoardView.swift in Sources */,
+				A10000000000000000000018 /* ProjectsView.swift in Sources */,
+				A10000000000000000000019 /* SettingsView.swift in Sources */,
+				A1000000000000000000001B /* TaskItem.swift in Sources */,
+				A1000000000000000000001C /* ProjectItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
